@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mini Navegador Web</title>
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; }
+    #barra { padding: 10px; background: #222; color: white; display: flex; gap: 5px; }
+    #barra input { flex: 1; padding: 5px; }
+    #barra button { padding: 5px 10px; cursor: pointer; }
+    iframe { width: 100%; height: calc(100vh - 50px); border: none; }
+  </style>
+</head>
+<body>
+  <div id="barra">
+    <input type="text" id="busqueda" placeholder="Buscar en DuckDuckGo">
+    <button onclick="buscar()">Ir</button>
+  </div>
+  <iframe id="visor" src="https://duckduckgo.com"></iframe>
+
+  <script>
+    function buscar() {
+      const query = document.getElementById('busqueda').value;
+      const iframe = document.getElementById('visor');
+      if(query.trim() === '') {
+        iframe.src = 'https://duckduckgo.com';
+      } else {
+        iframe.src = 'https://duckduckgo.com/?q=' + encodeURIComponent(query);
+      }
+    }
+
+    // Enter en input
+    document.getElementById('busqueda').addEventListener('keydown', e => {
+      if(e.key === 'Enter') buscar();
+    });
+  </script>
+</body>
+</html>
